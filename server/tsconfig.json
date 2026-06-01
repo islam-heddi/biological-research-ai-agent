@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2022",                          // Set target modern JS
+    "module": "nodenext",                        // Set module system
+    "rootDir": "./src",                          // Source files directory
+    "outDir": "./dist",                          // Compiled JavaScript output
+    "strict": true,                              // Enable strict type-checking
+    "esModuleInterop": true,                     // Emit interoperability between CommonJS and ES Modules
+    "skipLibCheck": true,                        // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true     // Ensure case-sensitive file paths
+  },
+  "include": ["src/**/*"]                        // Target everything in the src folder
+}
