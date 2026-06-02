@@ -9,17 +9,15 @@ async function scrapeWebsite() {
   
   try {
     // 3. Navigate to your target website
-    await page.goto('https://example.com', { waitUntil: 'domcontentloaded' });
+    await page.goto('https://pubmed.ncbi.nlm.nih.gov/trending/?size=200', { waitUntil: 'domcontentloaded' });
     
     // 4. Wait for a specific CSS element selector to load completely
-    await page.waitForSelector('h1');
+    await page.waitForSelector('article');
     
     // 5. Evaluate the page DOM to extract text data
     const pageData = await page.evaluate(() => {
-      const heading = document.querySelector('h1')?.innerText;
-      const paragraphs = Array.from(document.querySelectorAll('p')).map(p => p.innerText);
-      
-      return { heading, paragraphs };
+      const docs = document.getElementsByClassName("docsum-content")
+      return {docs}
     });
     
     console.log('Scraped Data:', pageData);
