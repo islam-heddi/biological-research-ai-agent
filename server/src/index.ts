@@ -1,3 +1,4 @@
+import { cronjobResearch } from "./services/search.service.js"
 import dotenv from "dotenv"
 dotenv.config()
 import express from "express"
@@ -9,7 +10,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json())
 app.use(cors())
-connectDb()
+connectDb().then(() => {
+    cronjobResearch.start() // this will start it immediatly, when the database is established
+})
 
 app.get("/", (_req, res) => {
     return res.status(200).send("hello world");
