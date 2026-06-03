@@ -16,13 +16,17 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",
+    "@types/selenium-webdriver": "^4.35.6",
     "typescript": "^6.0.3"
   },
   "dependencies": {
     "cors": "^2.8.6",
+    "cron": "^4.4.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "fetch": "^1.1.0",
     "mongoose": "^9.6.3",
-    "puppeteer": "^25.1.0"
+    "puppeteer": "^25.1.0",
+    "selenium-webdriver": "^4.44.0"
   }
 }

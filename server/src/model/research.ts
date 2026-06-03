@@ -7,12 +7,11 @@ const ResearchSchema = new Schema({
     },
     url: {
         type: String,
-        require: true
     },
-    authors: [{
+    authors: {
         type: String,
         default: ""
-    }],
+    },
     abstractResearch: {
         type: String
     },

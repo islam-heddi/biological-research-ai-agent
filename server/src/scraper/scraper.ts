@@ -1,32 +1,30 @@
-import puppeteer from 'puppeteer';
+import { Builder, By, until } from 'selenium-webdriver'
+import chrome from 'selenium-webdriver/chrome.js'
 
-async function scrapeWebsite() {
-  // 1. Launch a headless browser instance
-  const browser = await puppeteer.launch({ headless: true });
-  
-  // 2. Open a new browser tab
-  const page = await browser.newPage();
-  
-  try {
-    // 3. Navigate to your target website
-    await page.goto('https://pubmed.ncbi.nlm.nih.gov/trending/?size=200', { waitUntil: 'domcontentloaded' });
-    
-    // 4. Wait for a specific CSS element selector to load completely
-    await page.waitForSelector('article');
-    
-    // 5. Evaluate the page DOM to extract text data
-    const pageData = await page.evaluate(() => {
-      const docs = document.getElementsByClassName("docsum-content")
-      return {docs}
-    });
-    
-    console.log('Scraped Data:', pageData);
-  } catch (error) {
-    console.error('Error during scraping execution:', error);
-  } finally {
-    // 6. Ensure the browser closes to prevent memory leaks
-    await browser.close();
-  }
+async function runScraper() {
+    // 1. Configure the browser to run invisibly (headless mode)
+//    let options = new chrome.Options();
+  //  options.addArguments('--headless=new'); 
+    //options.addArguments('--disable-gpu');
+    //options.addArguments('--no-sandbox');
+
+    // 2. Initialize the Chrome WebDriver instance
+    let driver = await new Builder()
+        .forBrowser('chrome')
+      //  .setChromeOptions(options)
+        .build();
+
+    try {
+        // 3. Command the browser to load your target website
+        console.log("Navigating to target site...");
+        await driver.get('https://https://pubmed.ncbi.nlm.nih.gov/trending/'); // Replace with your target URL
+
+    } catch (error) {
+        console.error('An error occurred during extraction:', error);
+    } finally {
+        // 6. Gracefully terminate the browser process to clear RAM allocations
+        await driver.quit();
+    }
 }
 
-scrapeWebsite();
+runScraper();
