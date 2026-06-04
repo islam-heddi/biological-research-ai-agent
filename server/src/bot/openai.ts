@@ -40,6 +40,37 @@ const generateMessage = async (prompt: string, biologicalData: ResearchType[], h
     }
 }
 
+const generateDemontrationByAI = async (biologicalData: ResearchType) => {
+    if(prompt.length < 1) return "please put a prompt to start";
+    const AIRole = `you are a biological assistant, and you have to answer and to discuss about biological field.
+        -you have this biological data news which is in the JSON string below:
+        ${biologicalData.toString()}
+        -try to give a demontration according to the given biological research briefly
+    `;
+
+    const messages: OpenAiChats[] = [{
+            role: "system",
+            content: AIRole
+        }
+    ]
+
+    try {
+        const openai = new OpenAI({
+            baseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
+            apiKey: process.env.GEMINI_API_KEY
+        }) 
+        const chat = await openai.chat.completions.create({
+            messages: messages,
+            model: 'gemini-2.5-flash', 
+        })
+
+        return chat.choices[0]?.message.content;
+    } catch (error) {
+        throw error
+    }
+}
+
 export {
-    generateMessage
+    generateMessage,
+    generateDemontrationByAI
 }

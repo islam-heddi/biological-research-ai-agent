@@ -1,5 +1,7 @@
 import type {Request, Response} from "express"
 import { Research } from "../model/research.js"
+import { ResearchType } from "../types/research.types.js";
+import { generateDemontrationByAI } from "../bot/openai.js";
 
 const getResearchs = async (_req: Request, res: Response) => {
     try {
@@ -14,9 +16,10 @@ const getRsearchById = async (req: Request, res: Response) => {
     const id = req.params.id;
     if(!id) return res.status(404).send("missing id research");
     try {
-        const research = await Research.findById(id);
+        const research: ResearchType | null = await Research.findById(id);
         if(!research) return res.status(400).send("research not found")
-        return res.status(200).send(research)
+        const AiExplanation = await generateDemontrationByAI(research)
+        return res.status(200).send({research, AiExplanation})
     } catch (error: any) {
         return res.status(500).send(error.message)
     }
