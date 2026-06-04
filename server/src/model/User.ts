@@ -1,9 +1,9 @@
 import {Schema, model} from "mongoose"
 import bcrypt from "bcrypt"
+import { Document } from "mongoose";
 
 
-interface IUser {
-    _id: string;
+interface IUser extends Document{
     name: string;
     password: string;
     email: string;
