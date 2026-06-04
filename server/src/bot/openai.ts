@@ -41,16 +41,17 @@ const generateMessage = async (prompt: string, biologicalData: ResearchType[], h
 }
 
 const generateDemontrationByAI = async (biologicalData: ResearchType) => {
-    if(prompt.length < 1) return "please put a prompt to start";
     const AIRole = `you are a biological assistant, and you have to answer and to discuss about biological field.
-        -you have this biological data news which is in the JSON string below:
-        ${biologicalData.toString()}
-        -try to give a demontration according to the given biological research briefly
+        -the user will give a stringified json that have that research and so try to explain to him academically and also briefly.
     `;
 
     const messages: OpenAiChats[] = [{
             role: "system",
             content: AIRole
+        },
+        {
+            role: "user",
+            content: JSON.stringify(biologicalData)
         }
     ]
 
