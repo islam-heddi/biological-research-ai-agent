@@ -16,14 +16,17 @@ const login = async (req: Request, res: Response) => {
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {expiresIn: "1h"});
         res.cookie("token", token, {httpOnly: true, secure: process.env.NODE_ENV === "production"});
         return res.status(200).send({user,token});
-    } catch (error) {
-        return res.status(500).send(error)
+    } catch (error: any) {
+        return res.status(500).send(error.message || "Server error")
     }
 }
 
 const register = async (req: Request, res: Response) => {
     const {name, email, password} = req.body;
     try {
+        if(!name || !email || !password) {
+            return res.status(400).send("Please provide all required fields");
+        }
         const existingUser = await User.findOne({email});
         if (existingUser) {
             return res.status(400).send("User already exists");
@@ -34,12 +37,18 @@ const register = async (req: Request, res: Response) => {
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {expiresIn: "1h"});
         res.cookie("token", token, {httpOnly: true, secure: process.env.NODE_ENV === "production"});
         return res.status(201).send({user, token: token});
-    } catch (error) {
-        return res.status(500).send(error)
+    } catch (error: any) {
+        return res.status(500).send(error.message || "Server error")
     }
+}
+
+const deconnect = async (_req: Request, res: Response) => {
+    res.clearCookie("token");
+    return res.status(200).send("Logged out successfully");
 }
 
 export {
     register,
-    login
+    login,
+    deconnect
 }
