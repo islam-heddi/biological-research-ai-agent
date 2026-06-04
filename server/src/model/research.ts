@@ -1,6 +1,14 @@
 import {Schema, model} from 'mongoose';
+import Document from "mongoose";
+interface IResearch extends Document {
+    name: string;
+    url?: string;
+    authors?: string;
+    abstractResearch?: string;
+    dateResearch?: Date;
+};
 
-const ResearchSchema = new Schema({
+const ResearchSchema = new Schema<IResearch>({
     name: {
         type: String,
         require: true
