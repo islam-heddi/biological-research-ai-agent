@@ -4,7 +4,7 @@ import { createMessageREST, getMessages } from "../../controller/messages.contro
 const router: Router = Router();
 
 
-router.get("/", getMessages)
+router.get("/:channelId", getMessages)
 router.post("/create", createMessageREST)
 
 export default router
