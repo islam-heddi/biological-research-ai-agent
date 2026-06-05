@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { Channel } from "../model/Channel.js";
 import { AuthRequest } from "../types/auth.types.js";
+import { Message } from "../model/Message.js";
 
 const createChannel = async (req: Request, res:Response) => {
     const userId = (req as AuthRequest).userId
@@ -45,9 +46,26 @@ const getChannels = async (req: Request, res: Response) => {
     }
 }
 
+const deleteChannel = async (req: Request, res: Response) => {
+    const {channelId} = req.params;
+    try {
+        await Message.deleteMany({
+            channelId
+        })
+
+        await Channel.findByIdAndDelete(channelId);
+
+        return res.status(200).send("channel have been deleted");
+
+    } catch (error: any) {
+        return res.status(500).send(error.message)
+    }
+}
+
 
 export {
     getChannels,
     createChannel,
-    updateChannel
+    updateChannel,
+    deleteChannel
 }

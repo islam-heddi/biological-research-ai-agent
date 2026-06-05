@@ -4,6 +4,7 @@ import { AuthRequest } from "../types/auth.types.js";
 import { MessageType } from "../types/message.types.js";
 import { generateMessage } from "../bot/openai.js";
 import { Research } from "../model/research.js";
+import { Channel } from "../model/Channel.js";
 
 const getMessages = async (req: Request, res: Response) => {
     const userId = (req as AuthRequest).userId
@@ -28,6 +29,8 @@ const createMessageREST = async (req:Request, res:Response) => { // this is for 
     try {
         if(content === "") return res.status(400).send("content is empty");
         if(!channelId) return res.status(400).send("channel id is missing");
+        const checkChannel = await Channel.findById(channelId);
+        if(!checkChannel) return res.status(404).send("channel has not been created or an invalid channel id");
         const chatsChannel = await Message.find({channelId});
         const newMessage = await Message.create({
             role: "user",
@@ -69,6 +72,8 @@ const createMessage = async (message: MessageType) => { // this is for the socke
         if(message.content === "") throw Error("content is empty");
         if(!message.channelId) throw Error("channel id is empty");
         const {content, userId, channelId} = message;
+        const checkChannel = await Channel.findById(channelId);
+        if(!checkChannel) throw Error("channel has not been created or an invalid channel id");
         const chatsChannel = await Message.find({channelId});
         const newMessage = await Message.create({
             role: "user",
