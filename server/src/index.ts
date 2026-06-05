@@ -25,3 +25,5 @@ app.get("/", (_req, res) => {
 app.listen(PORT, () => {
     console.log(`the server is listening ${PORT}`)
 })
+
+export {app}
