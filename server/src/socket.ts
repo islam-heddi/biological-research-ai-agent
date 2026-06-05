@@ -10,8 +10,8 @@ const SocketMap = new Map<string, string>();// Map to store WebSocket connection
 
 const io = new socketIO.Server(server, {
   cors: {
-      origin: "*",
-      methods: ["GET", "POST"]
+    origin: process.env.VIEW_LINK,
+    methods: ["GET", "POST"]
   }
 })
 

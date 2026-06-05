@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({
+    origin: process.env.VIEW_LINK,
+    methods: ["POST", "GET", "PATCH", "PUT", "DELETE"],
+    credentials: true
+}))
 app.use("/api/", apiRouter)
 connectDb().then(() => {
     cronjobResearch.start() // this will start it immediatly, when the database is established
