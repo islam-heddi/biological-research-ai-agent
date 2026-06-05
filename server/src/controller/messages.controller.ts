@@ -8,6 +8,7 @@ const getMessages = async (req: Request, res: Response) => {
     const {content, role, channelId} = req.body;
     try {
         if(content === "") return res.status(400).send("content is empty");
+        if(!channelId) return res.status(400).send("channel id is missing");
         const newMessage = await Message.create({
             content,
             role,
@@ -26,6 +27,7 @@ const createMessageREST = async (req:Request, res:Response) => { // this is for 
     const {role, content, userId, channelId} = req.body;
     try {
         if(content === "") return res.status(400).send("content is empty");
+        if(!channelId) return res.status(400).send("channel id is missing");
         const newMessage = await Message.create({
             role: role,
             content: content,
@@ -44,6 +46,7 @@ const createMessage = async (message: MessageType) => { // this is for the socke
     "this is for the socket.io"
     try {
         if(message.content === "") throw Error("content is empty");
+        if(!message.channelId) throw Error("channel id is empty");
         const newMessage = await Message.create({
             role: message.role,
             content: message.content,
