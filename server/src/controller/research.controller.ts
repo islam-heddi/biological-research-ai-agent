@@ -2,10 +2,22 @@ import type {Request, Response} from "express"
 import { Research } from "../model/research.js"
 import { ResearchType } from "../types/research.types.js";
 import { generateDemontrationByAI } from "../bot/openai.js";
+import {numberOfPage, pagination} from "../utils/pagination.js" 
 
-const getResearchs = async (_req: Request, res: Response) => {
+const getResearchs = async (req: Request, res: Response) => {
+    const {page} = req.query;
     try {
         const researchs = await Research.find();
+        if(page) {
+            const pagedElements: ResearchType[] = pagination(parseInt(page as string), researchs)
+
+            const result = {
+                researchs: pagedElements,
+                pages: numberOfPage(researchs),
+                currentPage: page
+            }
+            return res.status(200).send(result)
+        }
         return res.status(200).send(researchs)
     } catch (error: any) {
         return res.status(500).send(error.message)
