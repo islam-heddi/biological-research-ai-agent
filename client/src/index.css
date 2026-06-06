@@ -1,3 +1,9 @@
+@import "tailwindcss";
 * {
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: rgb(12, 13, 0);
+  color: white;
 }
