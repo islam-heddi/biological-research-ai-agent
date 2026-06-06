@@ -1,4 +1,5 @@
 import Card from "../Components/Card"
+import CliWindow from "../Components/CliWindow"
 import Button from "../Components/FlashButton"
 import NoctureCard from "../Components/NoctureCard"
 
@@ -19,6 +20,7 @@ export default function Home() {
         <Card title="Trend Research" description="in our website you can check the latest best research" className="p-7" icon="leaf"/>
         <Card title="AI can reabstract" description="in our website there is an AI agent that give you a total explaination about any research"  className="p-7" icon="Tree"/>
       </div>
+      <div><CliWindow /></div>
     </div>
     </>
   )
