@@ -8,7 +8,9 @@ export default function Home() {
       <div className="flex flex-col items-center relative z-10">
           <h1 className="text-center text-6xl md:text-8xl font-black mb-6 leading-none tracking-tight"><span className="text-[#00ff41]">biology</span><br /><span className="text-[#00d4ff]">research AI agent System</span><br />for Best research.</h1>
           <p className="text-center font-['JetBrains Mono',monospace] text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">Check the latest trends of <span className="text-[#00ff41]">Biology</span> and <span className="text-[#00d4ff]">ask questions with AI</span>. Achieve high level of understanding.</p>
-          <Button className="p-4">Get Started</Button>
+          <Button className="p-4" onClick={() => console.log("Get Started clicked!")}>
+            Get Started
+          </Button>
       </div>
       <NoctureCard />
       <div>
