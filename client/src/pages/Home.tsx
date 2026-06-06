@@ -1,6 +1,7 @@
 import Card from "../Components/Card"
 import CliWindow from "../Components/CliWindow"
 import Button from "../Components/FlashButton"
+import Footer from "../Components/Footer"
 import NoctureCard from "../Components/NoctureCard"
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         <Card title="AI can reabstract" description="in our website there is an AI agent that give you a total explaination about any research"  className="p-7" icon="Tree"/>
       </div>
       <div><CliWindow /></div>
+      <Footer />
     </div>
     </>
   )
