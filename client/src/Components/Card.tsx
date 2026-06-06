@@ -43,7 +43,7 @@ function Card({
         <div className="space-y-3 mb-4">
         <div className="flex items-center gap-3">
             <span className="text-xs text-[#00ff41] font-semibold tracking-wider">
-                QUIMERA
+                ChatBio
             </span>
         <div className="flex-1 h-px bg-[#00ff41]/30"></div>
         </div>

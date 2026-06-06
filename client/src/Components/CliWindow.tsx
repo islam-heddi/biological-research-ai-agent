@@ -11,7 +11,7 @@ function CliWindow() {
                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
-                  <span className="text-[#00ff41] text-sm font-semibold ml-4" style={{ fontFamily: 'JetBrains Mono, monospace' }}>quimera-runtime v2.0.0 • APOPTOSIS ENGINE ACTIVE</span>
+                  <span className="text-[#00ff41] text-sm font-semibold ml-4" style={{ fontFamily: 'JetBrains Mono, monospace' }}>ChatBio-runtime • ENGINE ACTIVE</span>
                </div>
                <div className="p-6 h-80 overflow-hidden" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
                   <div className="flex items-center gap-2 mb-4">
