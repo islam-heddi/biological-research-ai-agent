@@ -1,11 +1,25 @@
 import type {Request, Response} from "express"
 import {User} from "../model/User.js"
 import jwt from "jsonwebtoken"
+import { AuthRequest } from "../types/auth.types.js"
+
+const getAuth = async (req:Request, res: Response) => {
+    const userId = (req as AuthRequest).userId
+    try{
+        const user = await User.findById(userId)
+
+        if(!user) return res.status(400).send("user not found");
+
+        return res.status(200).send(user);
+    }catch(error: any) {
+        return res.status(500).send(error.message)
+    }
+}
 
 const login = async (req: Request, res: Response) => {
     try {
         const {email, password} = req.body;
-        const user = await User.findOne({email});
+        const user = await User.findOne({email}).select("+password");
         if (!user) {
             return res.status(400).send("Invalid credentials");
         }
@@ -50,5 +64,6 @@ const deconnect = async (_req: Request, res: Response) => {
 export {
     register,
     login,
-    deconnect
+    deconnect,
+    getAuth
 }
