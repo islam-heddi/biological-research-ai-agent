@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import FlashButton from "../Components/FlashButton";
 import { Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { api } from "../api/api";
+import { LOGIN } from "../api/endpoints.constants";
 
 function Login() {
+  const [loading, startTransition] = useTransition();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -19,21 +23,32 @@ function Login() {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const val = validate();
-    setErrors(val);
-    setSubmitted(true);
-    if (val.length === 0) {
-      // Replace this with real submit logic (API call)
-      console.log({ email, password });
-      // Optionally clear form
-      setEmail("");
-      setPassword("");
-      setSubmitted(false);
-      alert("Registered (demo). Check console for payload.");
+    try {
+      e.preventDefault();
+      const val = validate();
+      setErrors(val);
+      setSubmitted(true);
+      if (val.length === 0) {
+        // Replace this with real submit logic (API call)
+        console.log({ email, password });
+        startTransition(async () => {
+          const res = await api.post(LOGIN, {
+            email,
+            password
+          })
+          console.log(res)
+          toast.success("login success")
+        })
+        // Optionally clear form
+        setEmail("");
+        setPassword("");
+        setSubmitted(false);
+      }
+    } catch (error: any) {
+        toast.error(error)
     }
-  };
 
+  };
   return (
     <div className="rounded-2xl bg-[#2020206e]" style={{ maxWidth: 480, margin: "2rem auto", padding: "1rem" }}>
       <div className="flex flex-row justify-center">
@@ -78,7 +93,7 @@ function Login() {
           </div>
         )}
         <div className="flex flex-row gap-3">
-            <FlashButton>Login</FlashButton>
+            <FlashButton isDisabled={loading}>{loading? "loading ..." : "Login"}</FlashButton>
             <FlashButton type="reset" backgroundColor="bg-blue-200" onClick={() => {
                 setEmail("")
                 setPassword("")

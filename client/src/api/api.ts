@@ -1,6 +1,7 @@
-import { Axios } from "axios";
+import axios from "axios";
+import type { AxiosInstance } from "axios";
 
-const api = new Axios({
+const api: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_LINK,
     withCredentials: true
 })
