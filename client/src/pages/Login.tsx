@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FlashButton from "../Components/FlashButton";
+import { Leaf } from "lucide-react";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -33,8 +34,12 @@ function Login() {
   };
 
   return (
-    <div className="border-green-600 border-2" style={{ maxWidth: 480, margin: "2rem auto", padding: "1rem" }}>
-      <h2>Login</h2>
+    <div className="rounded-2xl bg-[#2020206e]" style={{ maxWidth: 480, margin: "2rem auto", padding: "1rem" }}>
+      <div className="flex flex-row justify-center">
+      <Leaf size={"50px"} color="#11ff00" />
+      <h1 className="text-2xl m-3">Login</h1>
+      </div>
+      <p>Please fill these fields to Login.</p>
       <form onSubmit={handleSubmit} noValidate>
         <div style={{ marginBottom: 12 }}>
           <label htmlFor="email">Email</label>
@@ -73,7 +78,7 @@ function Login() {
         )}
         <div className="flex flex-row gap-3">
             <FlashButton>Login</FlashButton>
-            <FlashButton backgroundColor="bg-blue-200" onClick={() => {
+            <FlashButton type="reset" backgroundColor="bg-blue-200" onClick={() => {
                 setEmail("")
                 setPassword("")
             }}>Clear</FlashButton>

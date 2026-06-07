@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import FlashButton from "../Components/FlashButton";
+import { Leaf } from "lucide-react";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -40,8 +41,12 @@ function Register() {
   };
 
   return (
-    <div className="border-green-600 border-2" style={{ maxWidth: 480, margin: "2rem auto", padding: "1rem" }}>
-      <h2>Register</h2>
+    <div className="rounded-2xl bg-[#2020206e]" style={{ maxWidth: 480, margin: "2rem auto", padding: "1rem" }}>
+      <div className="flex flex-row justify-center">
+      <Leaf size={"50px"} color="#11ff00" />
+      <h1 className="text-2xl m-3">Register</h1>
+      </div>
+      <p>Please fill these fields to register.</p>
       <form onSubmit={handleSubmit} noValidate>
         <div style={{ marginBottom: 12 }}>
           <label htmlFor="username">Username</label>
@@ -103,7 +108,15 @@ function Register() {
             </ul>
           </div>
         )}
+        <div className="flex flex-row gap-2">
         <FlashButton>Register</FlashButton>
+        <FlashButton type="reset" backgroundColor="bg-blue-200" onClick={() => {
+            setUsername("")
+            setEmail("")
+            setPassword("")
+            setConfirm("")
+        }}>Clear</FlashButton>
+        </div>
       </form>
     </div>
   );
