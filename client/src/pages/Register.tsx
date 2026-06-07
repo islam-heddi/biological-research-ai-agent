@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import FlashButton from "../Components/FlashButton";
 import { Leaf } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -118,6 +119,7 @@ function Register() {
         }}>Clear</FlashButton>
         </div>
       </form>
+      <p className="p-5">if you have an account, click <Link className="text-green-600 hover:text-green-300 " to={"/login"}>here</Link>.</p>
     </div>
   );
 }
