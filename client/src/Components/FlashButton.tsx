@@ -1,17 +1,18 @@
 import React from 'react'
 
-export default function Button({ type,flashIcon,children, className, backgroundColor, onClick}: Readonly<{
+export default function Button({isDisabled, type,flashIcon,children, className, backgroundColor, onClick}: Readonly<{
     children: React.ReactNode;
     className?: string;
     backgroundColor?: string;
     flashIcon?: boolean;
     type?: "button" | "reset" | "submit";
+    isDisabled?: boolean;
     onClick?: () => void;
 }>) {
     
   return (
     <div className={className || ""}>
-        <button type={type} onClick={onClick || (() => {})} className={`group relative px-8 py-4 ${backgroundColor || " bg-[#00ff41]"} text-[#0A0A0A] font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,65,0.5)]`}>
+        <button disabled={isDisabled || false} type={type} onClick={onClick || (() => {})} className={`group relative px-8 py-4 ${backgroundColor || " bg-[#00ff41]"} text-[#0A0A0A] font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,65,0.5)]`}>
             <span className="relative z-10 flex items-center gap-2" style={{
             fontFamily: "&quot;JetBrains Mono&quot;, monospace;"
         }}>

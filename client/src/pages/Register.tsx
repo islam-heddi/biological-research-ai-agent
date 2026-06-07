@@ -1,11 +1,15 @@
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import FlashButton from "../Components/FlashButton";
 import { Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
+import { api } from "../api/api";
+import { REGISTER } from "../api/endpoints.constants";
+import { toast } from "react-toastify";
 
 function Register() {
-  const [username, setUsername] = useState("");
+  const [loading, startTransition] = useTransition()
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -14,7 +18,7 @@ function Register() {
 
   const validate = () => {
     const errs: string[] = [];
-    if (!username.trim()) errs.push("Username is required.");
+    if (!name.trim()) errs.push("name is required.");
     if (!email.trim()) errs.push("Email is required.");
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.push("Enter a valid email address.");
     if (!password) errs.push("Password is required.");
@@ -23,21 +27,30 @@ function Register() {
     return errs;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const val = validate();
-    setErrors(val);
-    setSubmitted(true);
-    if (val.length === 0) {
-      // Replace this with real submit logic (API call)
-      console.log({ username, email, password });
-      // Optionally clear form
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirm("");
-      setSubmitted(false);
-      alert("Registered (demo). Check console for payload.");
+  const handleSubmit = async (e: React.FormEvent) => {
+    try {
+      e.preventDefault();
+      const val = validate();
+      setErrors(val);
+      setSubmitted(true);
+      if(val.length !==0) toast.error("check the form again")
+      if (val.length === 0) {
+        // Replace this with real submit logic (API call)
+        console.log({ name, email, password });
+        startTransition(async () => {
+          await api.post(REGISTER, {name: name, email, password})
+        })
+        // Optionally clear form
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirm("");
+        setSubmitted(false);
+        toast.success("Registration passed")
+      }  
+    } catch (error) {
+      toast.error("Registration failed")
+      console.log(error)
     }
   };
 
@@ -50,13 +63,13 @@ function Register() {
       <p>Please fill these fields to register.</p>
       <form onSubmit={handleSubmit} noValidate>
         <div style={{ marginBottom: 12 }}>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="name">name</label>
           <input
-            id="username"
-            value={username}
+            id="name"
+            value={name}
             className="border-green-300 border-2"
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Your username"
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name"
             style={{ display: "block", width: "100%", padding: 8, boxSizing: "border-box" }}
           />
         </div>
@@ -110,9 +123,9 @@ function Register() {
           </div>
         )}
         <div className="flex flex-row gap-2">
-        <FlashButton>Register</FlashButton>
-        <FlashButton type="reset" backgroundColor="bg-blue-200" onClick={() => {
-            setUsername("")
+        <FlashButton isDisabled={loading}>{loading? "loading..." : "Register"}</FlashButton>
+        <FlashButton isDisabled={loading} type="reset" backgroundColor="bg-blue-200" onClick={() => {
+            setName("")
             setEmail("")
             setPassword("")
             setConfirm("")
