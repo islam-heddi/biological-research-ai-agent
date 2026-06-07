@@ -2,12 +2,13 @@
 import React, { useState, useTransition } from "react";
 import FlashButton from "../Components/FlashButton";
 import { Leaf } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api/api";
 import { REGISTER } from "../api/endpoints.constants";
 import { toast } from "react-toastify";
 
 function Register() {
+  const navigate = useNavigate()
   const [loading, startTransition] = useTransition()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,7 +39,14 @@ function Register() {
         // Replace this with real submit logic (API call)
         console.log({ name, email, password });
         startTransition(async () => {
-          await api.post(REGISTER, {name: name, email, password})
+          try {
+            await api.post(REGISTER, {name: name, email, password})
+            toast.success("Registration passed")
+            navigate("/dashboard")
+          } catch (error) {
+            console.log(error)
+            toast.error("registration failed")
+          }
         })
         // Optionally clear form
         setName("");
@@ -46,7 +54,6 @@ function Register() {
         setPassword("");
         setConfirm("");
         setSubmitted(false);
-        toast.success("Registration passed")
       }  
     } catch (error) {
       toast.error("Registration failed")

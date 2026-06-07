@@ -1,12 +1,13 @@
 import React, { useState, useTransition } from "react";
 import FlashButton from "../Components/FlashButton";
 import { Leaf } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../api/api";
 import { LOGIN } from "../api/endpoints.constants";
 
 function Login() {
+  const navigate = useNavigate();
   const [loading, startTransition] = useTransition();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,12 +33,18 @@ function Login() {
         // Replace this with real submit logic (API call)
         console.log({ email, password });
         startTransition(async () => {
-          const res = await api.post(LOGIN, {
-            email,
-            password
-          })
-          console.log(res)
-          toast.success("login success")
+          try {
+            const res = await api.post(LOGIN, {
+              email,
+              password
+            })
+            console.log(res)
+            toast.success("login success")
+            navigate("/dashboard")
+          } catch (error) {
+            console.log(error)
+            toast.error("login failed")
+          }
         })
         // Optionally clear form
         setEmail("");

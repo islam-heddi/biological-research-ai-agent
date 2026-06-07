@@ -4,6 +4,7 @@ export const LOGIN = "/api/public/user/login"; // post
 export const REGISTER = "/api/public/user/register"; //post
 //private
 export const DECONNECT = "/api/private/user/deconnect"; //delete
+export const GET_AUTH = "/api/private/user/auth"; //get
 //research
 export const GET_RESEARCHS = "/api/private/research/"; // get
 export const GET_RESEARCH_BY_PAGE = "/api/private/research/?page="; // get

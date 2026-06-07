@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import { ToastContainer } from "react-toastify"
 import Dashboard from "./pages/Dashboard"
+import Auth from "./context/Auth"
 function App() {
   return (<>
   <ToastContainer
@@ -19,12 +20,15 @@ function App() {
     theme="dark"
     />
     <BrowserRouter>
+      <Auth>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
+    </Auth>
     </BrowserRouter>
     </>
   )
