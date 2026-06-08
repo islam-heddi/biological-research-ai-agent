@@ -5,6 +5,8 @@ import Register from "./pages/Register"
 import { ToastContainer } from "react-toastify"
 import Dashboard from "./pages/Dashboard"
 import Auth from "./context/Auth"
+import { Provider } from "react-redux"
+import { store } from "./context/store"
 function App() {
   return (<>
   <ToastContainer
@@ -19,17 +21,18 @@ function App() {
     pauseOnHover
     theme="dark"
     />
-    <BrowserRouter>
-      <Auth>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Auth>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Auth>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </Auth>
+      </BrowserRouter>
+    </Provider>
     </>
   )
 }

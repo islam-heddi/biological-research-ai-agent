@@ -2,9 +2,12 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { api } from "../api/api";
 import { GET_AUTH } from "../api/endpoints.constants";
+import { useDispatch } from "react-redux";
+import { update } from "./AuthState";
+
 function Auth({children}: Readonly<{children: React.ReactNode}>) {
   const navigate = useNavigate();
-  console.log()
+  const dispatch = useDispatch();
   const publicRoutes = [
     "/",
     "/register",
@@ -13,14 +16,25 @@ function Auth({children}: Readonly<{children: React.ReactNode}>) {
 
   useEffect(() => {
     api.get(GET_AUTH)
-    .then(() => {
+    .then((res) => {
+      console.log(res.data)
       if(publicRoutes.includes(window.location.pathname)){
+        dispatch(update({
+          userId: res.data._id,
+          user: res.data.name,
+          isAuthed: true
+        }))
         navigate("/dashboard")
       }
     })
     .catch(err => {
       if(!publicRoutes.includes(window.location.pathname)){
         console.log(err)
+        dispatch(update({
+          userId: "",
+          user: "",
+          isAuthed: false
+        }))
         navigate("/login")
       }
     })

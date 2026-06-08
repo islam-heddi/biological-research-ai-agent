@@ -1,7 +1,10 @@
+import SideBar from "../Components/SideBar"
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div>
+      <SideBar />
+    </div>
   )
 }
 
