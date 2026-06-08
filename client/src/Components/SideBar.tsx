@@ -1,14 +1,11 @@
 import { useSelector } from "react-redux"
 function SideBar() {
-    const auth = useSelector((state: any)=> {
-        const {userId, user, isAuthed} = state.auth.value;
-        const object = {userId, user, isAuthed};
-        return object
-    })
+    useSelector((state: any)=> console.log(state))
+    const user = useSelector((state: any)=> state.auth.value.user)
   return (
     <div>
         <div>
-            {auth.user}
+            {user}
         </div>
         <div>
             Chat bot

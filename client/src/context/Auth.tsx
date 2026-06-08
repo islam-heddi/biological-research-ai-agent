@@ -19,23 +19,23 @@ function Auth({children}: Readonly<{children: React.ReactNode}>) {
     .then((res) => {
       console.log(res.data)
       if(publicRoutes.includes(window.location.pathname)){
+        navigate("/dashboard")
         dispatch(update({
           userId: res.data._id,
           user: res.data.name,
           isAuthed: true
         }))
-        navigate("/dashboard")
       }
     })
     .catch(err => {
       if(!publicRoutes.includes(window.location.pathname)){
         console.log(err)
+        navigate("/login")
         dispatch(update({
           userId: "",
           user: "",
           isAuthed: false
         }))
-        navigate("/login")
       }
     })
   }, publicRoutes)
