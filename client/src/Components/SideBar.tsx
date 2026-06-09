@@ -20,7 +20,7 @@ interface ISideBar {
 }
 function SideBar({list}: ISideBar) {
     const dispatch = useDispatch()
-    const [isOpened, setIsOpened] = useState<boolean>(true)
+    const [isOpened, setIsOpened] = useState<boolean>(false)
     const navigate = useNavigate()
     const user = useSelector((state: any)=> state.auth.value.user)
     const deconnect = async () => {
@@ -47,7 +47,7 @@ function SideBar({list}: ISideBar) {
     }
   return (
     <>
-      <div className={`min-[700px]:hidden p-3`}>
+      <div className={`min-[700px]:hidden p-3 flex flex-row items-center justify-between bg-[#1f1f1f] rounded-2xl`}>
         <div>
           <div className={`${!isOpened? "": "hidden"} cursor-pointer`} onClick={() => setIsOpened(true)}>
             <Menu size={"30px"} color="#11ff00" />
@@ -56,6 +56,11 @@ function SideBar({list}: ISideBar) {
             <X size={"30px"} color="#11ff00" />
           </div>
         </div>
+        <div className="flex items-center gap-2">
+            <Leaf size={"40px"} color="#11ff00" />
+            <h1 className="text-2xl">ChatBio</h1>
+        </div>
+        <div></div>
       </div>
 
       <div className={`min-[700px]:hidden fixed inset-y-0 left-0 z-50 h-full w-72 bg-[#1f1f1f] p-4 ${isOpened ? "flex" : "hidden"} flex-col shadow-xl`}> 
