@@ -1,21 +1,34 @@
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useEffect, useState, useTransition } from "react"
 import { api } from "../api/api";
-import { GET_RESEARCHS } from "../api/endpoints.constants";
+import { GET_RESEARCH_BY_PAGE, GET_RESEARCHS } from "../api/endpoints.constants";
 import { toast } from "react-toastify";
-import type { ResearchType } from "../types/types";
+import type { PaginationResponseType, ResearchType } from "../types/types";
 import Skeleton from "react-loading-skeleton";
 import React from "react";
 import ResearchCard from "../Components/ResearchCard";
+import { useSearchParams } from 'react-router-dom';
+import Pagination from '../Components/Pagination';
 
 function Researchs() {
+  const [data, setData] = useState()
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // 1. Get a specific query value (e.g., ?query=apple)
+  const page = searchParams.get('page') || 1;
+
+  const handleUpdate = (newValue: string) => {
+    // 2. Set/Update the query parameters in the URL
+    setSearchParams({ page: newValue });
+  };
   const [loading, startTransition] = useTransition();
   const [researchs, setResearchs] = useState<ResearchType[]>([])
   useEffect(() => {
     startTransition(async () => {
       try {
-        const res = await api.get(GET_RESEARCHS)
-        setResearchs(res.data)
+        const res = await api.get(GET_RESEARCH_BY_PAGE+page)
+        console.log(res)
+        setResearchs((res.data as PaginationResponseType).researchs)
       } catch (error) {
         toast.error("cant load researchs")
       }
@@ -24,11 +37,15 @@ function Researchs() {
   },[])
 
   return (
-    <div>
-      {loading? <Skeleton baseColor='#0d0d0d5b' count={5} enableAnimation={true}/> : researchs.map((value, index) => <React.Fragment key={index}>
-        <ResearchCard research={value}/>
-      </React.Fragment>)}
-
+    <div className='h-screen overflow-y-hidden'>
+      <div className='overflow-y-auto h-[90vh]'>
+        {loading? <Skeleton baseColor='#0d0d0d5b' count={5} enableAnimation={true}/> : researchs.map((value, index) => <React.Fragment key={index}>
+          <ResearchCard research={value}/>
+        </React.Fragment>)}
+      </div>
+      <div className='flex flex-row justify-center items-center'>
+        <Pagination page={"1"} maxPages='17' updatePage={handleUpdate} />
+      </div>
     </div>
   )
 }
