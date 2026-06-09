@@ -31,7 +31,17 @@ function ResearchCard({research} : IResearchCard) {
             {research.authors}
         </p>
         
-        
+        <div className="space-y-3 mb-4">
+        <div className="flex items-center gap-3">
+            <span className="text-xs text-[#00ff41] font-semibold tracking-wider">
+                Research date
+            </span>
+        <div className="flex-1 h-px bg-[#00ff41]/30"></div>
+        </div>
+        </div>
+        <p className="text-gray-400 text-sm leading-relaxed">
+            {research.dateResearch?.toString().split("T")[0] ||""}
+        </p>
       </div>
         
     </div>
