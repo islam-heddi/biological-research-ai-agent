@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import type { ResearchType } from "../types/types"
 
 interface IResearchCard {
@@ -5,8 +6,9 @@ interface IResearchCard {
 }
 
 function ResearchCard({research} : IResearchCard) {
+    const navigate = useNavigate()
   return (
-    <div className="pr-2 cursor-pointer">
+    <div onClick={() => navigate(`/research/${research._id}`)} className="pr-2 cursor-pointer">
          <div className={"bg-black"}>
         <div className="relative border border-gray-800 bg-black/30 p-8 hover:border-[#00ff41] transition-all duration-300 group" style={{
             opacity: "1",

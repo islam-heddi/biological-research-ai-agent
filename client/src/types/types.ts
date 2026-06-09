@@ -1,5 +1,6 @@
 
 type ResearchType = {
+    _id?: string;
     name: string;
     url?: string;
     authors?: string;
