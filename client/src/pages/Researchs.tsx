@@ -1,7 +1,7 @@
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useEffect, useState, useTransition } from "react"
 import { api } from "../api/api";
-import { GET_RESEARCH_BY_PAGE, GET_RESEARCHS } from "../api/endpoints.constants";
+import { GET_RESEARCH_BY_PAGE } from "../api/endpoints.constants";
 import { toast } from "react-toastify";
 import type { PaginationResponseType, ResearchType } from "../types/types";
 import Skeleton from "react-loading-skeleton";
@@ -18,7 +18,6 @@ function Researchs() {
   const page = searchParams.get('page') || 1;
 
   const handleUpdate = (newValue: string) => {
-    console.log("update reserches page")
     // 2. Set/Update the query parameters in the URL
     setSearchParams({ page: newValue });
     window.location.reload();
@@ -29,7 +28,6 @@ function Researchs() {
     startTransition(async () => {
       try {
         const res = await api.get(GET_RESEARCH_BY_PAGE+page)
-        console.log(res)
         setResearchs((res.data as PaginationResponseType).researchs)
         setData(res.data)
       } catch (error) {

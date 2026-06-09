@@ -17,7 +17,7 @@ function Auth({children}: Readonly<{children: React.ReactNode}>) {
   useEffect(() => {
     api.get(GET_AUTH)
     .then((res) => {
-      console.log(res.data)
+//      console.log(res.data)
       if(publicRoutes.includes(window.location.pathname)){
         navigate("/dashboard")
         dispatch(update({
