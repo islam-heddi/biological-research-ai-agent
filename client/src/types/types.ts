@@ -14,8 +14,14 @@ type PaginationResponseType = {
     researchs: ResearchType[] 
 }
 
+type ResearchWithAi = {
+    AiExplanation: string; 
+    research: ResearchType;
+}
+
 
 export  type {
     ResearchType,
-    PaginationResponseType
+    PaginationResponseType,
+    ResearchWithAi
 }
