@@ -6,7 +6,7 @@ function PrivateLayout() {
     <div className="flex max-[800px]:flex-col min-h-screen bg-[#121212]">
       <SideBar
         list={[
-          { name: "Chatbot", link: "/chat" },
+          { name: "Chatbot", link: "/channels" },
           { name: "Researchs", link: "/Researchs" },
           { name: "Setting", link: "/settings" },
         ]}

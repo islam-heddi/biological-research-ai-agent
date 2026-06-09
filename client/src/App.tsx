@@ -8,6 +8,11 @@ import Auth from "./context/Auth"
 import { Provider } from "react-redux"
 import { store } from "./context/store"
 import PrivateLayout from "./Components/PrivateLayout"
+import Settings from "./pages/Settings"
+import Researchs from "./pages/Researchs"
+import Research from "./pages/Research"
+import Channels from "./pages/Channels"
+import Chat from "./pages/Chat"
 function App() {
   return (<>
   <ToastContainer
@@ -31,6 +36,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route element={<PrivateLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/channels" element={<Channels />} />
+              <Route path="/research" element={<Research />} />
+              <Route path="/researchs" element={<Researchs />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Routes>
         </Auth>
