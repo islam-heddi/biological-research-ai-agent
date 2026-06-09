@@ -11,15 +11,17 @@ import { useSearchParams } from 'react-router-dom';
 import Pagination from '../Components/Pagination';
 
 function Researchs() {
-  const [data, setData] = useState()
+  const [data, setData] = useState<PaginationResponseType>()
   const [searchParams, setSearchParams] = useSearchParams();
 
   // 1. Get a specific query value (e.g., ?query=apple)
   const page = searchParams.get('page') || 1;
 
   const handleUpdate = (newValue: string) => {
+    console.log("update reserches page")
     // 2. Set/Update the query parameters in the URL
     setSearchParams({ page: newValue });
+    window.location.reload();
   };
   const [loading, startTransition] = useTransition();
   const [researchs, setResearchs] = useState<ResearchType[]>([])
@@ -29,6 +31,7 @@ function Researchs() {
         const res = await api.get(GET_RESEARCH_BY_PAGE+page)
         console.log(res)
         setResearchs((res.data as PaginationResponseType).researchs)
+        setData(res.data)
       } catch (error) {
         toast.error("cant load researchs")
       }
@@ -44,7 +47,7 @@ function Researchs() {
         </React.Fragment>)}
       </div>
       <div className='flex flex-row justify-center items-center'>
-        <Pagination page={"1"} maxPages='17' updatePage={handleUpdate} />
+        <Pagination page={data?.currentPage as string} maxPages={data?.pages as string} updatePage={handleUpdate} />
       </div>
     </div>
   )

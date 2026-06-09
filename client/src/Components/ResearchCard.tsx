@@ -6,7 +6,7 @@ interface IResearchCard {
 
 function ResearchCard({research} : IResearchCard) {
   return (
-    <div className="pr-2">
+    <div className="pr-2 cursor-pointer">
          <div className={"bg-black"}>
         <div className="relative border border-gray-800 bg-black/30 p-8 hover:border-[#00ff41] transition-all duration-300 group" style={{
             opacity: "1",
