@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import { CircleUser, Leaf, Menu, Settings, X } from "lucide-react";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { api } from "../api/api";
 import { DECONNECT } from "../api/endpoints.constants";
 import { useState } from "react";
+import { clear } from "../context/AuthState";
 
 type NavigationType = {
     name: string;
@@ -18,6 +19,7 @@ interface ISideBar {
     list: NavigationType[]
 }
 function SideBar({list}: ISideBar) {
+    const dispatch = useDispatch()
     const [isOpened, setIsOpened] = useState<boolean>(true)
     const navigate = useNavigate()
     const user = useSelector((state: any)=> state.auth.value.user)
@@ -26,6 +28,7 @@ function SideBar({list}: ISideBar) {
             await api.delete(DECONNECT)
             navigate("/login")
             toast.success("Log out successfully");
+            dispatch(clear())
         } catch (error) {
             toast.error("Error when logout")
         }

@@ -7,7 +7,8 @@ const authSlice = createSlice({
     value: {
         userId: "",
         user: "",
-        isAuthed: false
+        isAuthed: false,
+        email: ""
     }
   },
   reducers: {
@@ -15,10 +16,17 @@ const authSlice = createSlice({
         state.value.userId = action.payload.userId;
         state.value.user = action.payload.user;
         state.value.isAuthed = action.payload.isAuthed;
+        state.value.email = action.payload.email;
+    },
+    clear: (state) => {
+        state.value.userId = "";
+        state.value.user = "";
+        state.value.isAuthed = false;
+        state.value.email = "";
     }
   }
 });
 
 
-export const {update} = authSlice.actions;
+export const {update, clear} = authSlice.actions;
 export default authSlice.reducer;

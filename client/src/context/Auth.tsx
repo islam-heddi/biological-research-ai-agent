@@ -23,7 +23,8 @@ function Auth({children}: Readonly<{children: React.ReactNode}>) {
         dispatch(update({
           userId: res.data._id,
           user: res.data.name,
-          isAuthed: true
+          isAuthed: true,
+          email: res.data.email
         }))
       }
     })
@@ -34,7 +35,8 @@ function Auth({children}: Readonly<{children: React.ReactNode}>) {
         dispatch(update({
           userId: "",
           user: "",
-          isAuthed: false
+          isAuthed: false,
+          email: ""
         }))
       }
     })
