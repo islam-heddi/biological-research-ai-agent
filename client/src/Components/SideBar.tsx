@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
-import { CircleUser, Leaf, Menu, Settings, X } from "lucide-react";
+import { CircleUser, Leaf, LogOut, Menu, Settings, X } from "lucide-react";
 import { Cpu } from "lucide-react";
 import { Dna } from "lucide-react";
 import { toast } from "react-toastify";
@@ -95,7 +95,7 @@ function SideBar({list}: ISideBar) {
             className="text-white hover:bg-gray-600 p-4 inline-flex flex-row gap-2 cursor-pointer"
           >
             <div className="p-4 inline-flex flex-row gap-2">
-              <CircleUser color="#11ff00" />
+              <LogOut color="#ff0000"/>
               Logout
             </div>
           </div>
@@ -127,8 +127,7 @@ function SideBar({list}: ISideBar) {
             className="bottom-0 absolute text-white hover:bg-gray-600 p-4 inline-flex flex-row gap-2"
           >
             <div className="p-4 inline-flex flex-row gap-2">
-              <CircleUser color="#11ff00" />
-              Logout
+                <LogOut color="#ff0000"/>              Logout
             </div>
           </div>
         </div>
