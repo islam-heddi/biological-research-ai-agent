@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard"
 import Auth from "./context/Auth"
 import { Provider } from "react-redux"
 import { store } from "./context/store"
+import PrivateLayout from "./Components/PrivateLayout"
 function App() {
   return (<>
   <ToastContainer
@@ -28,7 +29,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={<PrivateLayout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
           </Routes>
         </Auth>
       </BrowserRouter>
