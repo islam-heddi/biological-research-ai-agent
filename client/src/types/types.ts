@@ -7,7 +7,14 @@ type ResearchType = {
     dateResearch?: Date;
 }
 
+type PaginationResponseType = {
+    currentPage: string;
+    pages: string;
+    researchs: ResearchType[] 
+}
+
 
 export  type {
-    ResearchType
+    ResearchType,
+    PaginationResponseType
 }
