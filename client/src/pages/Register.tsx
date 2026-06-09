@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api/api";
 import { REGISTER } from "../api/endpoints.constants";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { update } from "../context/AuthState";
 
 function Register() {
   const navigate = useNavigate()
@@ -16,6 +18,7 @@ function Register() {
   const [confirm, setConfirm] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const dispatch = useDispatch()
 
   const validate = () => {
     const errs: string[] = [];
@@ -40,7 +43,13 @@ function Register() {
         console.log({ name, email, password });
         startTransition(async () => {
           try {
-            await api.post(REGISTER, {name: name, email, password})
+            const res = await api.post(REGISTER, {name: name, email, password})
+            dispatch(update({
+              user: res.data.user.name,
+              email: res.data.user.email,
+              userId: res.data.user._id,
+              isAuthed: true
+            }))
             toast.success("Registration passed")
             navigate("/dashboard")
           } catch (error) {

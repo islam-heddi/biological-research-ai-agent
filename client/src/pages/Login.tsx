@@ -5,8 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../api/api";
 import { LOGIN } from "../api/endpoints.constants";
-
+import { useDispatch } from "react-redux";
+import { update } from "../context/AuthState";
 function Login() {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [loading, startTransition] = useTransition();
   const [email, setEmail] = useState("");
@@ -39,8 +41,15 @@ function Login() {
               password
             })
             console.log(res)
+            dispatch(update({
+              user: res.data.user.name,
+              email: res.data.user.email,
+              userId: res.data.user._id,
+              isAuthed: true
+            }))
             toast.success("login success")
             navigate("/dashboard")
+            
           } catch (error) {
             console.log(error)
             toast.error("login failed")
