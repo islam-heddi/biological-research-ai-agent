@@ -28,7 +28,7 @@ function Researchs() {
     startTransition(async () => {
       try {
         const res = await api.get(GET_RESEARCH_BY_PAGE+page)
-        console.log(res)
+       // console.log(res)
         setResearchs((res.data as PaginationResponseType).researchs)
         setData(res.data)
       } catch (error) {

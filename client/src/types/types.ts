@@ -1,5 +1,6 @@
 
 type ResearchType = {
+    _id?: string;
     name: string;
     url?: string;
     authors?: string;
@@ -13,8 +14,14 @@ type PaginationResponseType = {
     researchs: ResearchType[] 
 }
 
+type ResearchWithAi = {
+    AiExplanation: string; 
+    research: ResearchType;
+}
+
 
 export  type {
     ResearchType,
-    PaginationResponseType
+    PaginationResponseType,
+    ResearchWithAi
 }
