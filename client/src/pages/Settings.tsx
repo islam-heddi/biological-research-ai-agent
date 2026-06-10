@@ -1,8 +1,6 @@
 import { Settings } from "lucide-react"
 import { Accordion} from "@szhsin/react-accordion";
 import AccordionItems from "../Components/AccordionItems";
-import Input from "../Components/Input";
-import Button from "../Components/FlashButton";
 import UpdateName from "../Components/UpdateName";
 import UpdateEmail from "../Components/UpdateEmail";
 import UpdatePassword from "../Components/UpdatePassword";
