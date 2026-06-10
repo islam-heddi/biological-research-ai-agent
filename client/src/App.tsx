@@ -38,7 +38,6 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/channels" element={<Channels />} />
-              <Route path="/research" element={<Research />} />
               <Route path="/research/:id" element={<Research />} />
               <Route path="/researchs" element={<Researchs />} />
               <Route path="/settings" element={<Settings />} />
