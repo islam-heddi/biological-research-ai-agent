@@ -2,6 +2,7 @@ import type {Request, Response} from "express"
 import {User} from "../model/User.js"
 import jwt from "jsonwebtoken"
 import { AuthRequest } from "../types/auth.types.js"
+import bcrypt from "bcrypt"
 
 const updateProfileName = async (req:Request, res:Response) => {
     const userId = (req as AuthRequest).userId;
@@ -36,7 +37,7 @@ const updateProfileEmail = async (req:Request, res:Response) => {
         const check = await user.comparePassword(password);
         if(!check) return res.status(401).send("Password is wrong!");
 
-        const updatedUser = await User.findByIdAndUpdate(userId, {name});
+        const updatedUser = await User.findByIdAndUpdate(userId, {email});
         return res.status(200).send({
             message: "the user has been updated",
             user: updatedUser
@@ -55,7 +56,8 @@ const updatePassword = async (req:Request,res:Response) => {
 
         const checkPassword = await user.comparePassword(password);
         if(!checkPassword) return res.status(401).send("password is wrong!");
-        const updatedPassword = await User.findByIdAndUpdate(userId, {password: newPassword})
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const updatedPassword = await User.findByIdAndUpdate(userId, {password: hashedPassword});   
         return res.status(200).send({
             message: "the user has been updated",
             user: updatedPassword
