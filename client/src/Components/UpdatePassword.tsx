@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 import { toast } from "react-toastify";
 import { api } from "../api/api";
 import { UPDATE_PROFILE_PASSWORD } from "../api/endpoints.constants";
-import type { AxiosError } from "axios";
 function UpdatePassword() {
     const [password, setPassword] = useState<string>("")
     const [newPassword, setNewPassword] = useState<string>("")

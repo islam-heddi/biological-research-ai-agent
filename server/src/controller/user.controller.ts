@@ -3,6 +3,29 @@ import {User} from "../model/User.js"
 import jwt from "jsonwebtoken"
 import { AuthRequest } from "../types/auth.types.js"
 import bcrypt from "bcrypt"
+import { Message } from "../model/Message.js"
+import { Channel } from "../model/Channel.js"
+
+const deleteAccount = async (req:Request, res:Response) => {
+    const userId = (req as AuthRequest).userId
+    const {password} = req.body;
+    try {
+        const user = await User.findById(userId).select("+password");
+        if(!user) return res.status(400).send("user not found");
+
+        const check = await user.comparePassword(password);
+        if(!check) return res.status(401).send("Password is wrong!");
+
+        await Message.deleteMany({userId})
+        await Channel.deleteMany({userId})
+        await User.findByIdAndDelete(userId)
+
+        return res.status(200).send("the user has been deleted");
+        
+    } catch (error: any) {
+        return res.status(500).send(error.message)
+    }
+}
 
 const updateProfileName = async (req:Request, res:Response) => {
     const userId = (req as AuthRequest).userId;
@@ -133,5 +156,6 @@ export {
     getAuth,
     updatePassword,
     updateProfileEmail,
-    updateProfileName
+    updateProfileName,
+    deleteAccount
 }
