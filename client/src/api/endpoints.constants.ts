@@ -5,6 +5,9 @@ export const REGISTER = "/api/public/user/register"; //post
 //private
 export const DECONNECT = "/api/private/user/deconnect"; //delete
 export const GET_AUTH = "/api/private/user/auth"; //get
+export const UPDATE_PROFILE_NAME = "/api/private/user/update-profile-name"
+export const UPDATE_PROFILE_EMAIL = "/api/private/user/update-profile-email"
+export const UPDATE_PROFILE_PASSWORD = "/api/private/user/update-password"
 //research
 export const GET_RESEARCHS = "/api/private/research/"; // get
 export const GET_RESEARCH_BY_PAGE = "/api/private/research/?page="; // get

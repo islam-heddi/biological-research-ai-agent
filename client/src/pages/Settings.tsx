@@ -3,7 +3,9 @@ import { Accordion} from "@szhsin/react-accordion";
 import AccordionItems from "../Components/AccordionItems";
 import Input from "../Components/Input";
 import Button from "../Components/FlashButton";
+import UpdateName from "../Components/UpdateName";
 function SettingsPage() {
+
   return (
     <div>
       <div className="flex flex-row gap-2 items-center">
@@ -18,14 +20,7 @@ function SettingsPage() {
           <Accordion>
 
           <AccordionItems header="Name">
-            <div className="pb-4">
-            <label>Name : </label>
-            <Input placeholder="Enter your new name" type="text" />
-          
-            <label>Confirm password : </label>
-            <Input placeholder="Confirm your password" type="password" />
-            </div>
-            <Button>Save Changes</Button>
+            <UpdateName />
           </AccordionItems>
           
           <AccordionItems header="Email">
