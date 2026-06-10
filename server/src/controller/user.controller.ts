@@ -109,11 +109,11 @@ const login = async (req: Request, res: Response) => {
         const {email, password} = req.body;
         const user = await User.findOne({email}).select("+password");
         if (!user) {
-            return res.status(400).send("Invalid credentials");
+            return res.status(400).send("Invalid credentials: email does not exist");
         }
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
-            return res.status(400).send("Invalid credentials");
+            return res.status(400).send("Invalid credentials: incorrect password");
         }
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {expiresIn: "1h"});
         res.cookie("token", token, {httpOnly: true, secure: process.env.NODE_ENV === "production"});

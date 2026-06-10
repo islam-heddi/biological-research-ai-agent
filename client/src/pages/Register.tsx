@@ -64,9 +64,8 @@ function Register() {
         setConfirm("");
         setSubmitted(false);
       }  
-    } catch (error) {
-      toast.error("Registration failed")
-      console.log(error)
+    } catch (error: any) {
+      toast.error(error.response.data)
     }
   };
 

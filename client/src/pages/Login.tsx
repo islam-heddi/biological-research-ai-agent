@@ -50,9 +50,8 @@ function Login() {
             toast.success("login success")
             navigate("/dashboard")
             
-          } catch (error) {
-            console.log(error)
-            toast.error("login failed")
+          } catch (error: any) {
+            toast.error(error.response.data)
           }
         })
         // Optionally clear form
