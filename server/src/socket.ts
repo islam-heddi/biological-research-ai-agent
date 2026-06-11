@@ -1,22 +1,26 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from "http"
-import { app } from "./index.js"
-import socketIO from "socket.io"
+import {Server as SocketIOServer} from "socket.io"
 import { createMessage } from "./controller/messages.controller.js"
 import { MessageType } from "./types/message.types.js"
-
+import { Express } from "express"
+function startSocketServer(app: Express) {
+console.log("starting socket server")
 const server: Server<typeof IncomingMessage, typeof ServerResponse> = createServer(app)
 
 const SocketMap = new Map<string, string>();// Map to store WebSocket connections with their IDs
 
-const io = new socketIO.Server(server, {
+const io = new SocketIOServer(server, {
   cors: {
     origin: process.env.VIEW_LINK,
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST"],
+    credentials: true
   }
 })
 
+
 io.on("connection", (socket) => {
   const userId = socket.handshake.query?.userId;
+  console.log(userId + " connected")
   SocketMap.set(userId as string, socket.id)
 
   socket.on("message", async (msg: MessageType) => {
@@ -34,3 +38,8 @@ io.on("connection", (socket) => {
     }
   });
 })
+}
+
+export {
+  startSocketServer
+}

@@ -13,6 +13,7 @@ import Researchs from "./pages/Researchs"
 import Research from "./pages/Research"
 import Channels from "./pages/Channels"
 import Chat from "./pages/Chat"
+import SocketProvider from "./context/Socket"
 function App() {
   return (<>
   <ToastContainer
@@ -37,7 +38,9 @@ function App() {
             <Route element={<PrivateLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/chat" element={<Chat />} />
-              <Route path="/chat/:id" element={<Chat />} />
+              <Route element={<SocketProvider />}>
+                <Route path="/chat/:id" element={<Chat />} />
+              </Route>
               <Route path="/channels" element={<Channels />} />
               <Route path="/research/:id" element={<Research />} />
               <Route path="/researchs" element={<Researchs />} />

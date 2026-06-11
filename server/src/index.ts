@@ -6,6 +6,7 @@ import cors from "cors"
 import { connectDb } from "./config/db.js";
 import cookieParser from "cookie-parser"
 import apiRouter from "./routers/index.js"
+import { startSocketServer } from "./socket.js"
 
 const app = express()
 const PORT = process.env.PORT || 5000;
@@ -28,6 +29,7 @@ app.get("/", (_req, res) => {
 
 app.listen(PORT, () => {
     console.log(`the server is listening ${PORT}`)
+    startSocketServer(app)
 })
 
 export {app}
