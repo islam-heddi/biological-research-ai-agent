@@ -28,10 +28,17 @@ type ChannelType = {
     _id: string;
 }
 
+type MessageType = {
+    content: string;
+    role: "user" | "system";
+    userId?: string;
+    channelId?: string;
+}
 
 export  type {
     ResearchType,
     PaginationResponseType,
     ResearchWithAi,
-    ChannelType
+    ChannelType,
+    MessageType
 }
