@@ -7,3 +7,38 @@ body {
   background-color: rgb(12, 13, 0);
   color: white;
 }
+
+.popup-dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  max-width: calc(100vw - 40px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+/* Styles the built-in HTML backdrop overlay */
+.popup-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
