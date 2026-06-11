@@ -37,6 +37,7 @@ function App() {
             <Route element={<PrivateLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/chat" element={<Chat />} />
+              <Route path="/chat/:id" element={<Chat />} />
               <Route path="/channels" element={<Channels />} />
               <Route path="/research/:id" element={<Research />} />
               <Route path="/researchs" element={<Researchs />} />
