@@ -19,9 +19,19 @@ type ResearchWithAi = {
     research: ResearchType;
 }
 
+type ChannelType = {
+    createdAt: string;
+    name: string; 
+    updatedAt: string;
+    userId: string; 
+    __v: string; 
+    _id: string;
+}
+
 
 export  type {
     ResearchType,
     PaginationResponseType,
-    ResearchWithAi
+    ResearchWithAi,
+    ChannelType
 }
