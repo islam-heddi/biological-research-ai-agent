@@ -23,7 +23,12 @@ function startSocketServer(server: http.Server) {
     socket.on("message", async (msg: MessageType) => {
       const reply = await createMessage(msg)
       const socketId = SocketMap.get(msg.userId)
-      socket.to(socketId as string).emit("receive-message", reply)
+      const payload = reply.AIReply ?? reply
+      if (socketId) {
+        io.to(socketId as string).emit("receive-message", payload)
+      } else {
+        socket.emit("receive-message", payload)
+      }
     })
 
     socket.on("disconnecting", () => {

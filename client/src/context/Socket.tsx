@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { io } from "socket.io-client";
-import { updateSocket } from "./SocketState";
+import { clearSocket, updateSocket } from "./SocketState";
+import { addMsg } from "./ChatState";
+import type { MessageType } from "../types/types";
 function Socket() {
   const userId = useSelector((state: any) => state.auth.value.userId);
   const dispatch = useDispatch();
@@ -21,14 +23,15 @@ function Socket() {
     socket.on("connect_error", (error) => {
       console.error("socket connect error:", error)
     })
-
-    socket.on("message", () => {
-      
+    socket.on("receive-message", (message: MessageType) => {
+      console.log(message)
+      dispatch(addMsg(message))
     })
 
     return () => {
       socket.disconnect()
       console.log("socket disconnected")
+      dispatch(clearSocket())
     }
   }, [userId])
   return (
