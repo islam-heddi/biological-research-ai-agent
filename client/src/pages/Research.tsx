@@ -25,7 +25,7 @@ function Research() {
   },[])
 
   return (
-    <div className="overflow-y-auto h-[65%]">
+    <div className="max-h-[calc(100vh-4rem)] overflow-y-auto pb-4">
       <h3 className="text-2xl font-bold mb-4" style={{
             fontFamily: "'JetBrains Mono', monospace"
         }}>

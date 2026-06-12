@@ -39,13 +39,13 @@ function Researchs() {
   },[])
 
   return (
-    <div className='h-screen overflow-y-hidden'>
-      <div className='overflow-y-auto h-[90vh]'>
+    <div className='max-h-[calc(100vh-4rem)] overflow-y-auto pb-4'>
+      <div className='space-y-4'>
         {loading? <Skeleton baseColor='#0d0d0d5b' count={5} enableAnimation={true}/> : researchs.map((value, index) => <React.Fragment key={index}>
           <ResearchCard research={value}/>
         </React.Fragment>)}
       </div>
-      <div className='flex flex-row justify-center items-center'>
+      <div className='flex flex-row justify-center items-center mt-4'>
         <Pagination page={data?.currentPage as string} maxPages={data?.pages as string} updatePage={handleUpdate} />
       </div>
     </div>
