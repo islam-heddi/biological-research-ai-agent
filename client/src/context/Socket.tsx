@@ -12,14 +12,18 @@ function Socket() {
         userId: userId
       }
     })
-    socket.on("connection", () => {
-        console.log("user connected")
+    socket.on("connect", () => {
+      console.log("user connected")
     })
+    socket.on("connect_error", (error) => {
+      console.error("socket connect error:", error)
+    })
+
     return () => {
-      socket.disconnect();
-      console.log("socket disconnected");
+      socket.disconnect()
+      console.log("socket disconnected")
     }
-  },[])
+  }, [userId])
   return (
     <Outlet />
 
