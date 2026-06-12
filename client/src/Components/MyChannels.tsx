@@ -45,7 +45,7 @@ function MyChannels() {
 
   return (
     <div className='m-6 overflow-y-auto h-[80vh]'>
-      {data.length < 1? <h1>No channel has been created.</h1>: data.map((value, index) => <React.Fragment key={index}>
+      {data.length < 1? <h1>No channel has been created.</h1>:data.sort((a,b) => (new Date(b.createdAt).getTime()) - (new Date(a.createdAt).getTime()) ).map((value, index) => <React.Fragment key={index}>
       <ChannelCard updateWithFunction={() => setIsOpenedPopUp(true)} channel={value} />
       <Popup 
         isOpen={isOpenedPopUp} 
