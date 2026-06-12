@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { clearSocket, updateSocket } from "./SocketState";
 import { addMsg } from "./ChatState";
 import type { MessageType } from "../types/types";
+import { updateThink } from "./ThinkState";
 function Socket() {
   const userId = useSelector((state: any) => state.auth.value.userId);
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function Socket() {
     socket.on("receive-message", (message: MessageType) => {
       console.log(message)
       dispatch(addMsg(message))
+      dispatch(updateThink(false))
     })
 
     return () => {

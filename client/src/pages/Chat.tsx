@@ -8,6 +8,7 @@ import { GET_MESSAGES_BY_CHANNEL } from "../api/endpoints.constants"
 import { toast } from "react-toastify"
 import { useDispatch } from "react-redux"
 import { updateChat } from "../context/ChatState"
+import { updateThink } from "../context/ThinkState"
 
 function Chat() {
   const dispatch = useDispatch()
@@ -21,6 +22,7 @@ function Chat() {
     .then(res => {
       setData(res.data)
       dispatch(updateChat(res.data))
+      dispatch(updateThink(false))
     })
     .catch((err) => {
       toast.error("cant load the messages, try again later");
