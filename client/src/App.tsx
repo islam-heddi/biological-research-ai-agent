@@ -14,6 +14,7 @@ import Research from "./pages/Research"
 import Channels from "./pages/Channels"
 import Chat from "./pages/Chat"
 import SocketProvider from "./context/Socket"
+import UnknownPage from "./pages/UnknownPage"
 function App() {
   return (<>
   <ToastContainer
@@ -32,12 +33,12 @@ function App() {
       <BrowserRouter>
         <Auth>
           <Routes>
+            <Route path="*" element={<UnknownPage />}/>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<PrivateLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/chat" element={<Chat />} />
               <Route element={<SocketProvider />}>
                 <Route path="/chat/:id" element={<Chat />} />
               </Route>
