@@ -27,12 +27,12 @@ function SettingsPage() {
       </div>
 
       <div className="mx-auto max-w-6xl rounded-[32px] border border-white/10 bg-[#0c1220]/95 p-6 shadow-2xl shadow-[#11ff00]/10 backdrop-blur-xl">
-        <Accordion className="space-y-4">
+        <Accordion allowMultiple allowZeroExpanded className="space-y-4">
           <AccordionItems header="Profile">
             <div className="space-y-4 text-slate-300">
               <p>Update your public profile information, including name and email.</p>
               <div className="space-y-4 rounded-3xl border border-white/5 bg-[#101826]/80 p-5">
-                <Accordion className="space-y-4">
+                <Accordion allowMultiple allowZeroExpanded className="space-y-4">
                   <AccordionItems header="Name">
                     <UpdateName />
                   </AccordionItems>
