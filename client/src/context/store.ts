@@ -1,6 +1,8 @@
 import {configureStore} from "@reduxjs/toolkit"
 import authReducer from "./AuthState"
 import chatReducer from "./ChatState"
+import socketReducer from "./SocketState"
+import thinkReducer from "./ThinkState"
 type AuthPayload = {
     auth: {
         value: {
@@ -37,7 +39,9 @@ const preloadedState = loadState()
 const store = configureStore({
     reducer: {
         auth: authReducer,
-        chat: chatReducer
+        chat: chatReducer,
+        socket: socketReducer,
+        think: thinkReducer
     },
     preloadedState
 })

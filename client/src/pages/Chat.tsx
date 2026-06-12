@@ -8,10 +8,11 @@ import { GET_MESSAGES_BY_CHANNEL } from "../api/endpoints.constants"
 import { toast } from "react-toastify"
 import { useDispatch } from "react-redux"
 import { updateChat } from "../context/ChatState"
+import { updateThink } from "../context/ThinkState"
 
 function Chat() {
   const dispatch = useDispatch()
-  const [data, setData] = useState<MessageType[]>([])
+  const [_data, setData] = useState<MessageType[]>([])
   const param = useParams();
   const id = param.id
   const MessageDivElement = useRef<HTMLDivElement>(null)
@@ -21,6 +22,7 @@ function Chat() {
     .then(res => {
       setData(res.data)
       dispatch(updateChat(res.data))
+      dispatch(updateThink(false))
     })
     .catch((err) => {
       toast.error("cant load the messages, try again later");
@@ -36,7 +38,7 @@ function Chat() {
   return (
     <div>
       <div ref={MessageDivElement} className="overflow-y-auto h-[85vh]">
-        <Messages messages={data} />
+        <Messages />
       </div>
       <MessageComponent />
     </div>

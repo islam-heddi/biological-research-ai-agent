@@ -47,7 +47,7 @@ function SideBar({list}: ISideBar) {
     }
   return (
     <>
-      <div className={`min-[700px]:hidden p-3 flex flex-row items-center justify-between bg-[#1f1f1f] rounded-2xl`}>
+      <div className={`min-[800px]:hidden p-3 flex flex-row items-center justify-between bg-[#1f1f1f] rounded-2xl`}>
         <div>
           <div className={`${!isOpened? "": "hidden"} cursor-pointer`} onClick={() => setIsOpened(true)}>
             <Menu size={"30px"} color="#11ff00" />
@@ -63,7 +63,7 @@ function SideBar({list}: ISideBar) {
         <div></div>
       </div>
 
-      <div className={`min-[700px]:hidden fixed inset-y-0 left-0 z-50 h-full w-72 bg-[#1f1f1f] p-4 ${isOpened ? "flex" : "hidden"} flex-col shadow-xl`}> 
+      <div className={`min-[800px]:hidden fixed inset-y-0 left-0 z-50 h-full w-72 bg-[#1f1f1f] p-4 ${isOpened ? "flex" : "hidden"} flex-col shadow-xl`}> 
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <Leaf size={"40px"} color="#11ff00" />
@@ -107,7 +107,7 @@ function SideBar({list}: ISideBar) {
         </div>
       </div>
 
-      <div className="max-[700px]:hidden inline-flex flex-col bg-[#1f1f1f] h-screen rounded-2xl w-3/12 min-w-52 max-w-75">
+      <div className="max-[800px]:hidden inline-flex flex-col bg-[#1f1f1f] h-screen rounded-2xl w-3/12 min-w-52 max-w-75">
         <div className="flex flex-row justify-center p-4">
           <Leaf size={"50px"} color="#11ff00" />
           <h1 className="text-2xl m-3">ChatBio</h1>
