@@ -26,7 +26,7 @@ function MyChannels() {
       }
       startTransition(async () => {
         try {
-          const res = await api.patch(UPDATE_CHANNEL+id, {
+          await api.patch(UPDATE_CHANNEL+id, {
             name: channelName
           })
           toast.success("channel updated successfully");

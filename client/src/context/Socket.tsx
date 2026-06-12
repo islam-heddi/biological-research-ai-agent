@@ -19,7 +19,7 @@ function Socket() {
     })
     dispatch(updateSocket(socket))
     socket.on("connect", () => {
-      console.log("user connected")
+//      console.log("user connected")
     })
     socket.on("connect_error", (error) => {
       console.error("socket connect error:", error)
@@ -32,7 +32,7 @@ function Socket() {
 
     return () => {
       socket.disconnect()
-      console.log("socket disconnected")
+//      console.log("socket disconnected")
       dispatch(clearSocket())
     }
   }, [userId])

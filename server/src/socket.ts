@@ -17,7 +17,6 @@ function startSocketServer(server: http.Server) {
 
   io.on("connection", (socket) => {
     const userId = socket.handshake.query?.userId
-    console.log(userId + " connected")
     SocketMap.set(userId as string, socket.id)
 
     socket.on("message", async (msg: MessageType) => {
