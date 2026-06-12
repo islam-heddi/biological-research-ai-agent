@@ -107,7 +107,7 @@ function SideBar({list}: ISideBar) {
         </div>
       </div>
 
-      <div className="max-[800px]:hidden inline-flex flex-col bg-[#1f1f1f] h-screen rounded-2xl w-3/12 min-w-52 max-w-75">
+      <div className="max-[800px]:hidden sticky top-4 self-start inline-flex flex-col bg-[#1f1f1f] h-[calc(100vh-2rem)] rounded-2xl w-3/12 min-w-52 max-w-75 overflow-hidden shadow-xl">
         <div className="flex flex-row justify-center p-4">
           <Leaf size={"50px"} color="#11ff00" />
           <h1 className="text-2xl m-3">ChatBio</h1>
@@ -126,10 +126,10 @@ function SideBar({list}: ISideBar) {
             </Link>
           </Fragment>
         ))}
-        <div className="cursor-pointer">
+        <div className="mt-auto">
           <div
             onClick={() => deconnect()}
-            className="bottom-0 absolute text-white hover:bg-gray-600 p-4 inline-flex flex-row gap-2"
+            className="text-white hover:bg-gray-600 p-4 inline-flex flex-row gap-2 cursor-pointer"
           >
             <div className="p-4 inline-flex flex-row gap-2">
                 <LogOut color="#ff0000"/>              Logout
