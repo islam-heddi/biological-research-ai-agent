@@ -2,13 +2,11 @@ import React from "react"
 import type { MessageType } from "../types/types"
 import {marked} from "marked"
 import parse from "html-react-parser"
+import { useSelector } from "react-redux"
 
-interface IMessages {
-    messages: MessageType[]
-}
 
-function Messages({messages}: IMessages) {
-    
+function Messages() {
+    const messages: MessageType[] = useSelector((state: any) => state.chat.value)
   return (
     <div className=" flex flex-col">
       {messages.length < 1? "Start a message": ""}

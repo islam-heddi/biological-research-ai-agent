@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { io } from "socket.io-client";
+import { updateSocket } from "./SocketState";
 function Socket() {
   const userId = useSelector((state: any) => state.auth.value.userId);
+  const dispatch = useDispatch();
   useEffect(() => {
 
     const socket = io(import.meta.env.VITE_API_LINK, {
@@ -12,11 +14,16 @@ function Socket() {
         userId: userId
       }
     })
+    dispatch(updateSocket(socket))
     socket.on("connect", () => {
       console.log("user connected")
     })
     socket.on("connect_error", (error) => {
       console.error("socket connect error:", error)
+    })
+
+    socket.on("message", () => {
+      
     })
 
     return () => {

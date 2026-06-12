@@ -11,7 +11,7 @@ import { updateChat } from "../context/ChatState"
 
 function Chat() {
   const dispatch = useDispatch()
-  const [data, setData] = useState<MessageType[]>([])
+  const [_data, setData] = useState<MessageType[]>([])
   const param = useParams();
   const id = param.id
   const MessageDivElement = useRef<HTMLDivElement>(null)
@@ -36,7 +36,7 @@ function Chat() {
   return (
     <div>
       <div ref={MessageDivElement} className="overflow-y-auto h-[85vh]">
-        <Messages messages={data} />
+        <Messages />
       </div>
       <MessageComponent />
     </div>
