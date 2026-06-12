@@ -1,4 +1,4 @@
-import { cronjobResearch } from "./services/search.service.js"
+import { cronjobResearch, initializeResearch } from "./services/search.service.js"
 import dotenv from "dotenv"
 dotenv.config()
 import express from "express"
@@ -25,6 +25,7 @@ app.use(
 app.use("/api/", apiRouter)
 connectDb().then(() => {
   cronjobResearch.start() // this will start it immediatly, when the database is established
+  initializeResearch();
 })
 
 app.get("/", (_req, res) => {
