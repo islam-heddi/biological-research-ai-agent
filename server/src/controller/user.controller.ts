@@ -154,7 +154,12 @@ const register = async (req: Request, res: Response) => {
 }
 
 const deconnect = async (_req: Request, res: Response) => {
-    res.clearCookie("token");
+    res.clearCookie("token",{
+    httpOnly: true,
+    secure: true,       // Must match the creation setting
+    sameSite: 'none',   // Must match the creation setting
+    // path: '/'        // Include this if you explicitly set a path during login
+  });
     return res.status(200).send("Logged out successfully");
 }
 
