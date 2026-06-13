@@ -25,7 +25,6 @@ function Socket() {
       console.error("socket connect error:", error)
     })
     socket.on("receive-message", (message: MessageType) => {
-      console.log(message)
       dispatch(addMsg(message))
       dispatch(updateThink(false))
     })

@@ -16,7 +16,6 @@ function Research() {
       try {
         const res = await api.get(GET_RESEARCH_BY_ID+id)
         setData(res.data)
-        console.log(res.data)
       } catch (error) {
         console.log(error)
         toast.error("error when loading the research")
