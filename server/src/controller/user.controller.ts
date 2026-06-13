@@ -116,7 +116,12 @@ const login = async (req: Request, res: Response) => {
             return res.status(400).send("Invalid credentials: incorrect password");
         }
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {expiresIn: "1h"});
-        res.cookie("token", token, {httpOnly: true, secure: process.env.NODE_ENV === "production"});
+        res.cookie("token", token, {
+            httpOnly: true,     // Prevents frontend JS from reading the cookie (Security best practice)
+            secure: true,       // REQUIRED for SameSite: 'none'. Means cookie only sends over HTTPS
+            sameSite: 'none',   // REQUIRED for cross-site cookies (Vercel to Render)
+            maxAge: 3600000     // 1 hour
+            });
         return res.status(200).send({user,token});
     } catch (error: any) {
         return res.status(500).send(error.message || "Server error")
@@ -137,8 +142,12 @@ const register = async (req: Request, res: Response) => {
         await user.save();
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {expiresIn: "1h"});
-        res.cookie("token", token, {httpOnly: true, secure: process.env.NODE_ENV === "production"});
-        return res.status(201).send({user, token: token});
+        res.cookie("token", token, {
+            httpOnly: true,     // Prevents frontend JS from reading the cookie (Security best practice)
+            secure: true,       // REQUIRED for SameSite: 'none'. Means cookie only sends over HTTPS
+            sameSite: 'none',   // REQUIRED for cross-site cookies (Vercel to Render)
+            maxAge: 3600000     // 1 hour
+        });        return res.status(201).send({user, token: token});
     } catch (error: any) {
         return res.status(500).send(error.message || "Server error")
     }
