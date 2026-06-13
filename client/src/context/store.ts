@@ -8,7 +8,8 @@ type AuthPayload = {
         value: {
             user: string;
             userId: string;
-            isAuthed: string;
+            isAuthed: boolean;
+            email: string;
         }
     }
 }

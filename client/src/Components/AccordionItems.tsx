@@ -10,7 +10,7 @@ interface IAccordionItems {
 /**
  * @type {React.ExoticComponent<import('@szhsin/react-accordion').AccordionItemProps>}
  */
-const AccordionItem = ({ header, ...rest }) => (
+const AccordionItem = ({ header, ...rest }: any) => (
   <Item
     {...rest}
     header={({ state: { isEnter } }) => (

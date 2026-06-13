@@ -1,4 +1,3 @@
-import React from "react"
 import type { MessageType } from "../types/types"
 import { marked } from "marked"
 import parse from "html-react-parser"

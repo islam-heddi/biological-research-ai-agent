@@ -8,7 +8,7 @@ const socketSlice = createSlice({
   },
   reducers: {
     updateSocket: (state, action) => {
-        state.value = action.payload as Socket<any>
+        state.value = action.payload
     },
     clearSocket: (state) => {
         state.value = null
