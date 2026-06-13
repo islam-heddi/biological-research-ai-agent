@@ -40,7 +40,6 @@ function Login() {
               email,
               password
             })
-            console.log(res)
             dispatch(update({
               user: res.data.user.name,
               email: res.data.user.email,

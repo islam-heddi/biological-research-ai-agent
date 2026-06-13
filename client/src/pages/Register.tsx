@@ -40,7 +40,6 @@ function Register() {
       if(val.length !==0) toast.error("check the form again")
       if (val.length === 0) {
         // Replace this with real submit logic (API call)
-        console.log({ name, email, password });
         startTransition(async () => {
           try {
             const res = await api.post(REGISTER, {name: name, email, password})
