@@ -37,4 +37,4 @@ server.listen(PORT, () => {
   startSocketServer(server)
 })
 
-export { app }
+export default app
