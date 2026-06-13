@@ -33,7 +33,6 @@ function Login() {
       setSubmitted(true);
       if (val.length === 0) {
         // Replace this with real submit logic (API call)
-        console.log({ email, password });
         startTransition(async () => {
           try {
             const res = await api.post(LOGIN, {
